@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyberbully Classifier</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        textarea {
+            width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 16px;
+            resize: none;
+            transition: border 0.3s;
+        }
+
+        textarea:focus {
+            border-color: #66a6ff;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            background-color: #66a6ff;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4a90e2;
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 30px;
+            background-color: #f1f8ff;
+            border-left: 5px solid #66a6ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        ul {
+            text-align: left;
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Cyberbully Tweet Classifier</h2>
+        <form method="POST">
+            <label for="tweet">Enter Tweet:</label>
+            <textarea name="tweet" rows="5" placeholder="Type or paste a tweet..."></textarea>
+            <input type="submit" value="Classify">
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h3>Predicted Cyberbullying Type:</h3>
+            <p><strong>{{ prediction }}</strong></p>
+
+            <h4>Class Probabilities:</h4>
+            <ul>
+                {% for cls, prob in prob_dict.items() %}
+                    <li>{{ cls }}: {{ prob }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
